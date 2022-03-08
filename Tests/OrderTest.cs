@@ -35,16 +35,13 @@ namespace CodeCampAssessment.Tests
         [TestMethod]
         public void PizzaHQ_VerifyOrderCount()
         {
-            string alertMessage;
             //act
             driver.FindElement(By.CssSelector("[aria-label=\"menu\"]")).Click();
             ClickMenuItem("DRINKS");
 
             //assert
-            //Assert.AreEqual("Your login was unsuccessful - please try again", alertMessage);
+
         }
-
-
 
         private void ClickMenuItem(string item)
         {
@@ -52,7 +49,6 @@ namespace CodeCampAssessment.Tests
 
             foreach (IWebElement element in menuItems)
             {
-                Console.WriteLine(element.Text);
                 if (element.Text == item)
                 {
                     element.Click();

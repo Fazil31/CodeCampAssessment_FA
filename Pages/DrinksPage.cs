@@ -18,7 +18,7 @@ namespace CodeCampAssessment.Pages
             this.driver = driver;
         }
 
-        private IWebElement OrderButton => driver.FindElement(By.ClassName(""));
+        private IWebElement OrderButton => driver.FindElement(By.CssSelector("[aria-label=\"Add to order\"]"));
         private ReadOnlyCollection<IWebElement> AllDrinks => driver.FindElements(By.CssSelector(""));
 
 
