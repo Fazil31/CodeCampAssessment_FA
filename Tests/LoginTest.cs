@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
 using CodeCampAssessment.Base;
+using CodeCampAssessment.Pages;
 
 namespace CodeCampAssessment.Tests
 {
@@ -13,36 +14,28 @@ namespace CodeCampAssessment.Tests
         [TestMethod]
         public void PizzaHQ_VerifyUnsuccessfulLogin()
         {
-            string alertMessage;
+            //arrange
+            new ToolBarPage(driver).NavigateToLogin();
+            LoginPage loginPage = new LoginPage(driver);
             //act
-            Login();
-            alertMessage = driver.FindElement(By.CssSelector("div.v-alert__content")).Text;
-            
+            loginPage.ClickLoginButton();
+
             //assert
-            Assert.AreEqual("Your login was unsuccessful - please try again", alertMessage);
+            Assert.AreEqual("Your login was unsuccessful - please try again", loginPage.GetAlertMessage());
         }
 
         [TestMethod]
         public void PizzaHQ_VerifyAlertNotDisplayed()
         {
-            bool isAlertPresent;
+            //arrange
+            new ToolBarPage(driver).NavigateToLogin();
+            LoginPage loginPage = new(driver);
             //act
-            Login();
-            driver.FindElement(By.CssSelector("[aria-label=\"Close\"]")).Click();
-            isAlertPresent = driver.FindElement(By.CssSelector("div.v-alert__content")).Displayed;
+            loginPage.ClickLoginButton();
+            loginPage.CloseAlertMessage();
 
             //assert
-            Assert.IsFalse(isAlertPresent, "Alert message is present");
+            Assert.IsFalse(loginPage.IsAlertMessagePresent(), "Alert message is present");
         }
-
-        private void Login()
-        {
-            new WebDriverWait(driver, TimeSpan.FromSeconds(6)).Until(d => driver.FindElement(By.CssSelector("[aria-label=\"login or signup\"]")).Displayed);
-            driver.FindElement(By.CssSelector("[aria-label=\"login or signup\"]")).Click();
-            new WebDriverWait(driver, TimeSpan.FromSeconds(6)).Until(d => driver.FindElement(By.CssSelector("[aria-label=\"login\"]")).Displayed);
-            driver.FindElement(By.CssSelector("[aria-label=\"login\"]")).Click();
-            new WebDriverWait(driver, TimeSpan.FromSeconds(5)).Until(d => driver.FindElement(By.CssSelector("div.v-alert__content")).Displayed);
-        }
-
     }
 }

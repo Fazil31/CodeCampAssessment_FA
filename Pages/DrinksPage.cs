@@ -17,10 +17,28 @@ namespace CodeCampAssessment.Pages
         {
             this.driver = driver;
         }
+        
+        private ReadOnlyCollection<IWebElement> AllDrinks => driver.FindElements(By.CssSelector(".menuItem.drink"));
 
-        private IWebElement OrderButton => driver.FindElement(By.CssSelector("[aria-label=\"Add to order\"]"));
-        private ReadOnlyCollection<IWebElement> AllDrinks => driver.FindElements(By.CssSelector(""));
+        public IEnumerable<Drink> GetDrinks()
+        {
+            foreach (var drink in AllDrinks) 
+            {
+                yield return new Drink(driver, drink);
+            }
+        }
 
+        public Drink GetDrink(Predicate<Drink> match)
+        {
+            foreach (var drink in GetDrinks())
+            {
+                if (match.Invoke(drink))
+                {
+                    return drink;
+                }
+            }
+            throw new NotFoundException($"Could not find the Drink.");
+        }
 
     }
 }

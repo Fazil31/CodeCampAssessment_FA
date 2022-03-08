@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 using CodeCampAssessment.Base;
+using CodeCampAssessment.Pages;
 
 namespace CodeCampAssessment.Tests
 {
@@ -11,25 +12,20 @@ namespace CodeCampAssessment.Tests
         [TestMethod]
         public void PizzaHQ_VerifyOrderCount()
         {
+            //arrange
+            ToolBarPage toolBarPage = new ToolBarPage(driver);
+            MenuBarPage menuBarPage = new MenuBarPage(driver);
+            DrinksPage drinksPage = new DrinksPage(driver);
+            PizzasPage pizzasPage = new PizzasPage(driver);
             //act
-            driver.FindElement(By.CssSelector("[aria-label=\"menu\"]")).Click();
-            ClickMenuItem("DRINKS");
+            toolBarPage.NavigateToMenu();
+            menuBarPage.ClickMenuItem("DRINKS");
+            drinksPage.GetDrink(d => d.GetDrinkName() == "Espresso Thickshake").ClickOrderButton(1);
+            menuBarPage.ClickMenuItem("PIZZAS");
+            pizzasPage.GetPizza(d => d.GetPizzaName() == "Margherita").ClickOrderButton(2);
 
             //assert
-        }
-
-        private void ClickMenuItem(string item)
-        {
-            ReadOnlyCollection<IWebElement> menuItems = driver.FindElements(By.ClassName("v-tab"));
-
-            foreach (IWebElement element in menuItems)
-            {
-                if (element.Text.StartsWith(item))
-                {
-                    element.Click();
-                    break;
-                }
-            }
+            Assert.AreEqual(3, toolBarPage.GetOrderCount());
         }
     }
 }
