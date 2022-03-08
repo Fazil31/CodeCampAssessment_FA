@@ -45,11 +45,11 @@ namespace CodeCampAssessment.Tests
 
         private void ClickMenuItem(string item)
         {
-            ReadOnlyCollection<IWebElement> menuItems = driver.FindElements(By.ClassName("div.v-tab.v-tab--active"));
+            ReadOnlyCollection<IWebElement> menuItems = driver.FindElements(By.ClassName("v-tab"));
 
             foreach (IWebElement element in menuItems)
             {
-                if (element.Text == item)
+                if (element.Text.StartsWith(item))
                 {
                     element.Click();
                     break;
