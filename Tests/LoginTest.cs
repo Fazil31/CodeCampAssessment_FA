@@ -3,30 +3,13 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
+using CodeCampAssessment.Base;
 
-namespace CodeCampAssessment
+namespace CodeCampAssessment.Tests
 {
     [TestClass]
-    public class LoginTest
+    public class LoginTest: BastTest
     {
-        IWebDriver driver;
-        WebDriverWait wait;
-
-        [TestInitialize]
-        public void SetUp()
-        {
-            driver = new ChromeDriver();
-            driver.Url = "https://d2ju5vf8ca0qio.cloudfront.net/#/";
-            driver.Manage().Window.Maximize();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(3));
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            driver?.Quit();
-        }
-
         [TestMethod]
         public void PizzaHQ_VerifyUnsuccessfulLogin()
         {

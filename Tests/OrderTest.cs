@@ -1,37 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CodeCampAssessment.Base;
 
 namespace CodeCampAssessment.Tests
 {
     [TestClass]
-    public class OrderTest
+    public class OrderTest : BastTest
     {
-        IWebDriver driver;
-        WebDriverWait wait;
-
-        [TestInitialize]
-        public void SetUp()
-        {
-            driver = new ChromeDriver();
-            driver.Url = "https://d2ju5vf8ca0qio.cloudfront.net/#/";
-            driver.Manage().Window.Maximize();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(3));
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            //driver.Quit();
-        }
-
         [TestMethod]
         public void PizzaHQ_VerifyOrderCount()
         {
@@ -40,7 +16,6 @@ namespace CodeCampAssessment.Tests
             ClickMenuItem("DRINKS");
 
             //assert
-
         }
 
         private void ClickMenuItem(string item)
