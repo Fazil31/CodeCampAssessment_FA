@@ -1,13 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenQA.Selenium;
-using System.Collections.ObjectModel;
 using CodeCampAssessment.Base;
 using CodeCampAssessment.Pages;
 
 namespace CodeCampAssessment.Tests
 {
     [TestClass]
-    public class OrderTest : BastTest
+    public class OrderTest : BaseTest
     {
         [TestMethod]
         public void PizzaHQ_VerifyOrderCount()

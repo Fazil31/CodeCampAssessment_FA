@@ -1,15 +1,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
-using System;
 using CodeCampAssessment.Base;
 using CodeCampAssessment.Pages;
 
 namespace CodeCampAssessment.Tests
 {
     [TestClass]
-    public class LoginTest: BastTest
+    public class LoginTest: BaseTest
     {
         [TestMethod]
         public void PizzaHQ_VerifyUnsuccessfulLogin()
@@ -35,7 +31,7 @@ namespace CodeCampAssessment.Tests
             loginPage.CloseAlertMessage();
 
             //assert
-            Assert.IsFalse(loginPage.IsAlertMessagePresent(), "Alert message is present");
+            Assert.IsFalse(loginPage.IsAlertMessagePresent(), "Alert message is present when not expected");
         }
     }
 }

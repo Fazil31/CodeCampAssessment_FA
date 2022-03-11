@@ -1,10 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeCampAssessment.Pages
 {
@@ -25,6 +21,8 @@ namespace CodeCampAssessment.Pages
 
         public void ClickLoginButton()
         {
+            // I would have this after inside ToolBarPage.NavigateToLogin method, after clicking. It tends
+            // to be more effective to wait *after* and action, rather than just before.
             new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(d => LoginButton.Displayed);
             LoginButton.Click();
         }
