@@ -1,9 +1,5 @@
 ﻿using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeCampAssessment.Pages
 {
@@ -16,6 +12,9 @@ namespace CodeCampAssessment.Pages
             this.driver = driver;
         }
 
+        // Perfectly fine syntax, and you're consistent so I don't want to change them.
+        // But why not:
+        // private IWebElement Login => driver.FindElement(By.CssSelector("[aria-label=\"login or signup\"]"));
         private IWebElement Login
         {
             get => driver.FindElement(By.CssSelector("[aria-label=\"login or signup\"]"));
